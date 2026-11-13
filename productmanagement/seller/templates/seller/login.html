@@ -1,0 +1,422 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AURELIA | Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f8f6f1;
+            font-family: 'DM Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            color: #30271f;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 610px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 15px 55px rgba(48, 39, 31, 0.10);
+        }
+
+        /* LEFT BRAND SECTION */
+
+        .brand-section {
+            background:
+                radial-gradient(circle at 80% 20%,
+                rgba(214,183,122,0.18), transparent 35%),
+                linear-gradient(145deg, #30271f, #49372a);
+
+            color: #fff;
+            padding: 55px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-section::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border: 1px solid rgba(214,183,122,0.20);
+            border-radius: 50%;
+            right: -160px;
+            top: 100px;
+        }
+
+        .brand-section::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border: 1px solid rgba(214,183,122,0.18);
+            border-radius: 50%;
+            right: -100px;
+            top: 160px;
+        }
+
+        .brand-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 43px;
+            letter-spacing: 7px;
+            color: #e4c58c;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-tagline {
+            margin-top: 8px;
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #c6b59a;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 1;
+            max-width: 380px;
+        }
+
+        .brand-content .small-heading {
+            color: #d6b77a;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .brand-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 53px;
+            line-height: 1.12;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .brand-content p {
+            color: #d3c8b9;
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .brand-footer {
+            color: #a99a85;
+            font-size: 11px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gold-line {
+            width: 55px;
+            height: 2px;
+            background: #d6b77a;
+            margin: 25px 0;
+        }
+
+        /* RIGHT LOGIN SECTION */
+
+        .form-section {
+            padding: 65px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-heading {
+            margin-bottom: 35px;
+        }
+
+        .form-heading span {
+            color: #a08352;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .form-heading h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 43px;
+            font-weight: 600;
+            margin: 12px 0 8px;
+            color: #30271f;
+        }
+
+        .form-heading p {
+            font-size: 13px;
+            color: #8a8177;
+        }
+
+        .input-group {
+            margin-bottom: 23px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 9px;
+            color: #51483f;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e5dfd5;
+            border-radius: 7px;
+            background: #fcfbf9;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #b18b51;
+            box-shadow: 0 0 0 3px rgba(177,139,81,0.10);
+            background: white;
+        }
+
+        .input-group input::placeholder {
+            color: #b0a99e;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 7px;
+            background: #92713f;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #70552f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(146,113,63,0.20);
+        }
+
+        .error-message {
+            color: #a34238;
+            background: #fff1ef;
+            border: 1px solid #f0d5d0;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .login-note {
+            text-align: center;
+            font-size: 11px;
+            color: #a49b90;
+            margin-top: 30px;
+            line-height: 1.8;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 750px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-wrapper {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+            }
+
+            .brand-section {
+                min-height: 220px;
+                padding: 30px;
+            }
+
+            .brand-logo {
+                font-size: 32px;
+            }
+
+            .brand-content {
+                display: none;
+            }
+
+            .brand-footer {
+                margin-top: 30px;
+            }
+
+            .form-section {
+                padding: 40px 30px;
+            }
+
+            .form-heading h2 {
+                font-size: 36px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+    <!-- BRAND SECTION -->
+
+    <div class="brand-section">
+
+        <div>
+            <div class="brand-logo">AURELIA</div>
+
+            <div class="brand-tagline">
+                THE ART OF ELEGANCE
+            </div>
+        </div>
+
+        <div class="brand-content">
+
+            <div class="small-heading">
+                A WORLD OF ELEGANCE
+            </div>
+
+            <h1>
+                Every piece tells a beautiful story.
+            </h1>
+
+            <div class="gold-line"></div>
+
+            <p>
+                Welcome to your jewellery collection management
+                space. Manage your creations, organize your
+                collection and keep every detail perfect.
+            </p>
+
+        </div>
+
+        <div class="brand-footer">
+            © 2026 AURELIA. ALL RIGHTS RESERVED.
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN SECTION -->
+
+    <div class="form-section">
+
+        <div class="form-heading">
+
+            <span>WELCOME BACK</span>
+
+            <h2>Sign In</h2>
+
+            <p>
+                Please enter your credentials to access your dashboard.
+            </p>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="error-message">
+                    Invalid username or password.
+                    Please try again.
+                </div>
+            {% endif %}
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <div class="input-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit" class="login-btn">
+                LOGIN TO DASHBOARD →
+            </button>
+
+        </form>
+
+
+        <div class="login-note">
+            AURELIA COLLECTION MANAGEMENT<br>
+            Designed with elegance and simplicity.
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
